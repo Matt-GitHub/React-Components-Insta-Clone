@@ -1,22 +1,24 @@
 // You will add code in this file
-import React from "react";
-import CommentSection from "../CommentSection/CommentSectionContainer";
-import LikeSection from "./LikeSection";
-import PostHeader from "./PostHeader";
+import React, { useState } from 'react';
+import CommentSection from '../CommentSection/CommentSectionContainer';
+import LikeSection from './LikeSection';
+import PostHeader from './PostHeader';
 
-import "./Posts.css";
+import './Posts.css';
 
 // pass props in this file to
 const Post = props => {
   // set up state for the likes
-
+  const [likes, setLikes] = useState(props.post.likes);
+  console.log(
+    'props we passed down from postPage into Post.js',
+    props.post.likes
+  );
   return (
     <div className="post-border">
       <PostHeader
         username={props.post.username}
-        thumbnailUrl={
-          props.post.thumbnailUrl
-        }
+        thumbnailUrl={props.post.thumbnailUrl}
       />
       <div className="post-image-wrapper">
         <img
@@ -25,7 +27,7 @@ const Post = props => {
           src={props.post.imageUrl}
         />
       </div>
-      <LikeSection />
+      <LikeSection likes={likes} setLikes={setLikes} />
       <CommentSection
         postId={props.post.imageUrl}
         comments={props.post.comments}
